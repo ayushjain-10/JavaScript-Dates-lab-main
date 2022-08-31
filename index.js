@@ -45,6 +45,8 @@ console.log('-------- BDay --------')
 
 const newYear = new Date(2021, 0, 1)
 const b_day = new Date(2003, 1, 11)
+const extra = new Date(2022, 9, 10)
+const extrab = new Date('09/01/2022')
 // Get the components from a date
 console.log(newYear.getFullYear(), newYear.getMonth(), newYear.getDate())
 // To get the month by name you might: 
@@ -88,7 +90,14 @@ console.log('--------- Problem 1 --------')
 
 function consecutiveDates(date, repeat, offset) {
   // Your code here 
-}
+  const Dates = []
+  for (let i = 0; i < repeat; i++) {
+    const newDate = new Date(date)
+    newDate.setDate(date.getDate() + offset * i)
+    Dates.push(newDate)
+  }
+    console.log(Dates)
+  }
 
 // Starting date 1/1/2019, repeat 4 times, return dates 
 // 3 days apart
@@ -124,6 +133,9 @@ console.log('--------- Problem 2 --------')
 function orderDates(dates) {
   // orders the dates 
   // returns a new array of ordered dates
+  const orderedDates = dates.sort (function (a, b) {return a - b})
+  console.log(orderedDates)
+  return orderedDates
 }
 
 orderDates([today, dueDate, startDate, bday, newYear])
@@ -145,11 +157,16 @@ console.log('--------- Problem 3 --------')
 // but not before. 
 
 function nextDate(dates) {
-  // find the date that will happen next in dates
-  // return the next date
+  const orderedDates = dates.sort (function (a, b) {return a - b})
+  const today = new Date()
+  for (let i = 0; i < dates.length; i++) {
+    if (orderedDates[i] > today) {
+      console.log(orderedDates[i])
+      return orderedDates[i]
+    }
+  }
 }
-
-nextDate([today, dueDate, startDate, bday, newYear])
+nextDate([today, dueDate, startDate, bday, newYear, extra, extrab])
 
 // Stretch Goal: Return a human readable string: 
 // Your next appointment is 3 days from now. 
@@ -161,6 +178,11 @@ console.log('--------- Problem 4 --------')
 
 function whensYourParty(date, year) {
   // Find the day of the year for your birthday
+  const newDate = new Date(date)
+  newDate.setFullYear(year)
+  const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
+  console.log(days[newDate.getDay()])
+  return days[newDate.getDay()]
 }
 
 whensYourParty(bday, 2022)
